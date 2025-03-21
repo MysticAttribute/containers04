@@ -1,0 +1,16 @@
+Prima comanda: docker build -t apache2-php-mariadb . //Cream imaginea
+A doua comanda: docker run -d --name apache2-php-mariadb apache2-php-mariadb bash //cream container pe baza maginii
+A treia comanda: docker run -d --name apache2-php-mariadb -p 80:80 apache2-php-mariadb // cream si pornim container pe porul 80
+
+R(hwprvdyHRWaJ8Dcs - password
+
+mkdir -p /var/log/supervisor && touch /var/log/supervisor/supervisord.log && chown -R root:root /var/log/supervisor && chmod -R 755 /var/log/supervisor //pentru supervisord
+
+mkdir -p /var/log/mysql && touch /var/log/mysql/error.log && chown mysql:mysql /var/log/mysql/error.log //MySQL log
+
+docker cp apache2-php-mariadb:/var/www/html/wp-config.php ./files/wp-config.php //copiere din docker pe host
+
+docker cp files/wp-config.php apache2-php-mariadb:/var/www/html/wp-config.php //copier de pe host docker
+
+docker run -d --name apache2-php-mariadb -p 80:80 -v mariadb_data:/var/lib/mysql apache2-php-mariadb
+
